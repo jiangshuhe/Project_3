@@ -30,7 +30,7 @@
             "translate(" + margin.left + "," + margin.top + ")");
   
   //Read the data
-  d3.csv("https://raw.githubusercontent.com/jiangshuhe/Project_3/main/src/try.csv", function(data) {
+  d3.csv("https://raw.githubusercontent.com/jiangshuhe/Project_3/main/src/try2.csv", function(data) {
   
       console.log("data",data)
 
@@ -43,7 +43,7 @@
       console.log("data",data)
 
       // List of groups (here I have one group per column)
-      var allGroup = d3.map(data, function(d){return(d.City)}).keys()
+      var allGroup = d3.map(data, function(d){return(d.Station)}).keys()
   
       // add the options to the button
       d3.select("#selectButton")
@@ -78,7 +78,7 @@
       var line = svg
         .append('g')
         .append("path")
-          .datum(data.filter(function(d){return d.City==allGroup[0]}))
+          .datum(data.filter(function(d){return d.Station==allGroup[0]}))
           .attr("d", d3.line()
             .x(function(d) { return x(d.Times) })
             .y(function(d) { return y(+d.AQI) })
@@ -91,7 +91,7 @@
       function update(selectedGroup) {
   
         // Create new data with the selection?
-        var dataFilter = data.filter(function(d){return d.City==selectedGroup})
+        var dataFilter = data.filter(function(d){return d.Station==selectedGroup})
   
         // Give these new data to update line
         line
