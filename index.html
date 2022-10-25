@@ -32,6 +32,16 @@
   //Read the data
   d3.csv("https://raw.githubusercontent.com/jiangshuhe/Project_3/main/src/try.csv", function(data) {
   
+      console.log("data",data)
+
+      var parseDate = d3.timeParse("%Y%m")
+      data.forEach(function(d) {
+        d.AQI = +d.AQI
+        d.Times = parseDate(d.Times)
+      })
+
+      console.log("data",data)
+
       // List of groups (here I have one group per column)
       var allGroup = d3.map(data, function(d){return(d.City)}).keys()
   
@@ -50,7 +60,7 @@
         .range(d3.schemeSet2);
   
       // Add X axis --> it is a date format
-      var x = d3.scaleLinear()
+      var x = d3.scaleTime()
         .domain(d3.extent(data, function(d) { return d.Times; }))
         .range([ 0, width ]);
       svg.append("g")
